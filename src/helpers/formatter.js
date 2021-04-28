@@ -1,5 +1,6 @@
 const formatter =(numbers)=>{
-    
+
+   
     const numbers_ = numbers.join('') 
     const len = numbers.length
     const div = Math.floor(len / 3)
@@ -54,7 +55,7 @@ const formatter =(numbers)=>{
         case 7 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,3)+'e'+len;break
         case 8 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,3)+'e'+len;break
         case 9 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,3)+'e'+len;break        
-        default: display = numbers_;break;
+        default: break;
     }
     return display
 }

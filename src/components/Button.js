@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Button (props) {
-  const { value, className, int, isClicked } = props
+  const { value, symbol, className, int, neg, isClicked } = props
 
   const handleClick = () => {
     let number = int()
@@ -9,7 +9,7 @@ function Button (props) {
   }
   return (
     <button value={value} className={className} onClick={handleClick}>
-      {value}
+      {symbol}
     </button>
   )
 }

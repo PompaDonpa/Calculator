@@ -1,121 +1,166 @@
 const data = [
     {
         value: "sin",
+        symbol:"sin",
         className: 'button scientific'
     },{
         value: "cos",
+        symbol:"cos",
         className: 'button scientific'
     },
     {
         value: "tan",
+        symbol:"tan",
         className: 'button scientific'
     },
     {
         value: "a²",
-        className: 'button scientific'
+        symbol:"a²",
+        className: 'button sq scientific'
     },
     {
-        value: "˄",
-        className: 'button scientific'
+        value: "^",
+        symbol:"^",
+        className: 'button pow scientific'
     },
     {
-        value: "√",
-        className: 'button scientific'
+        value: "sqrt",
+        symbol: "√",
+        className: 'button sqrt scientific'
     },
     {
-        value: "π",
-        className: 'button scientific'
+        value: "pi",
+        symbol: "π",
+        className: 'button pi scientific'
     },
     {
         value: "(",
+        symbol: "(",
         className: 'button scientific'
     },
     {
         value: ")",
+        symbol: ")",
         className: 'button scientific'
     },
     {
         value: "!",
-        className: 'button scientific'
+        symbol: "!",
+        className: 'button'
     },
     {
-        value: "%",
-        className: 'button scientific'
+        value: "mod",
+        symbol: "%",
+        className: 'button percentage scientific'
     },
     {
         value: "AC",
-        className: 'button scientific ac'
+        symbol: "AC",
+        className: 'button ac scientific'
     },
     {
         value: "±",
-        className: 'button scientific'
+        symbol: "±",
+        className: 'button neg scientific'
     },
     {
-        value: "→",
-        className: 'button scientific'
+        value: "←",
+        symbol: "←",
+        className: 'button delete scientific'
     },
     {
         value: "7",
+        symbol: "7",
         className: 'button number'
     },
     {
         value: "8",
+        symbol: "8",
         className: 'button number'
     },
     {
         value: "9",
+        symbol: "9",
         className: 'button number'
     },
     {
-        value: "÷",
+        value: "/",
+        symbol: "÷",
         className: 'button control'
     },
     {
         value: "4",
+        symbol: "4",
         className: 'button number'
     },
     {
         value: "5",
+        symbol: "5",
         className: 'button number'
     },
     {
         value: "6",
+        symbol: "6",
+        // info: {
+        //     type: 'number',
+        //     value: '6',
+        //     symbol: '6',
+        // },
         className: 'button number'
     },
     {
-        value: "x",
+        value: "*",
+        symbol: "x",
+        // info: {
+        //     type: 'operator',
+        //     value: '*',
+        //     symbol: 'x',
+        // },
         className: 'button control'
     },
     {
         value: "1",
+        symbol: "1",
         className: 'button number'
     },
     {
         value: "2",
+        symbol: "2",
         className: 'button number'
     },
     {
         value: "3",
+        symbol: "3",
         className: 'button number'
     },
     {
         value: "-",
+        symbol: "-",
         className: 'button control'
     },
     {
         value: "=",
-        className: 'button control result'
+        symbol: "=",
+        className: 'button result control'
     },
     {
         value: "0",
-        className: 'button number zero'
+        symbol: "0",
+        className: 'button zero number'
     },
     {
         value: ".",
+        symbol: ".",
         className: 'button number'
     },
     {
         value: "+",
+        symbol: "+",
+        // info: {
+        //     type: 'operator',
+        //     value: '+',
+        //     symbol: '+',
+        // },
         className: 'button control'
     }
 
