@@ -1,15 +1,14 @@
 import React from 'react'
 
 function Display (props) {
-  const { numbers, evaluate, format } = props
+  const { numbers, display, number } = props
 
-  const show = evaluate.join('')
- console.log(format(show.split('')))
-
+  const formatted = (isNaN(parseFloat(number))) ? 0 : parseFloat(number).toLocaleString()
+  const evaluate = (display != number) ? display : formatted
   return (
     <div className='display glass'>
-      {format(numbers) || '0'}
-      <div className='preview'>{show || '0'}</div>
+      {formatted || '0'}
+      <div className='preview'>{evaluate.toLocaleString() || '0'}</div>
     </div>
   )
 }

@@ -1,14 +1,15 @@
 import React from 'react'
 
 function Button (props) {
-  const { value, symbol, className, int, neg, isClicked } = props
+  const { type, value, symbol, className, input } = props
 
-  const handleClick = () => {
-    let number = int()
-    isClicked(value, className,number)
-  }
   return (
-    <button value={value} className={className} onClick={handleClick}>
+    <button
+      type={type}
+      value={`${value},${type}`}
+      className={className}
+      onClick={input}
+    >
       {symbol}
     </button>
   )

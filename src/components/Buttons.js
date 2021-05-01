@@ -2,38 +2,34 @@ import React from 'react'
 import Button from './Button'
 
 function Buttons (props) {
-  const { skeleton, isClicked } = props
+  const { buttons, input } = props
 
   class Boton {
-    constructor (value, symbol, className) {
+    constructor (type, value, symbol, className) {
+      this.type = type
       this.value = value
       this.symbol = symbol
       this.className = className
-      this.int = this.int.bind(this)
-      this.neg = this.neg.bind(this)
     }
-    int () {return parseInt(this.value)}
-    neg () {return parseInt(this.value)*(-1)}
   }
 
-  const buttons = skeleton.map(item => {
-    const { value, symbol, className } = item
-    const button = new Boton(value, symbol, className)
+  const keys = buttons.map(item => {
+    const { info, className } = item
+    const button = new Boton(info.type, info.value, info.symbol, className)
 
     return (
       <Button
         key={button.symbol}
+        type={button.type}
         value={button.value}
         symbol={button.symbol}
         className={button.className}
-        isClicked={isClicked}
-        int={button.int}
-        neg={button.neg}
+        input={input}
       />
     )
   })
 
-  return <>{buttons}</>
+  return <>{keys}</>
 }
 
 export default Buttons
