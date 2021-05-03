@@ -1,13 +1,17 @@
-import 'css-doodle'
-import './App.css'
 import React from 'react'
+import { ToastContainer,toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
 import Navigation from './components/Navigation'
 import Calculator from './components/Calculator'
 import {Decimal} from 'decimal.js'
+import operation from './helpers/operation'
+import { create, all } from 'mathjs'
+import data from './helpers/data'
+import './App.css'
+import 'css-doodle'
 // import formatter from './helpers/formatter'
 
-import data from './helpers/data'
-import { create, all } from 'mathjs'
 
 const config = { }
 const math = create(all, config)
@@ -19,60 +23,154 @@ class App extends React.Component {
       display: "",
       number:"",
       evaluate: "",
-      numbers:[],
-      result: 0,
+      result: "",
       prevNum: "",
-      prevEva: [],
-      prevRes: 0
+      prevEva: "",
+      prevRes: "",
+      deleted: false,
+      hasError: false
     }
 
   }
   
-  input =(e)=>{
-    const [input,type] = e.target.value.split(',')
-    if(type === "number"){
-        this.setState({
-          //numbers : this.state.numbers.concat(input),
-          number: this.state.number.concat(input),
-          display: this.state.number.concat(input)
-        })
-
-    }else{
-      const evaluate = this.state.evaluate + this.state.display.concat(` ${input} `)
-      this.setState({
-        display: this.state.display.concat(` ${input} `),
-        numbers: this.state.numbers.concat(parseFloat(this.state.number)),
-        prevNum: this.state.number,
-        prevEva: [this.state.display,input],
-        evaluate: evaluate,
-        number: ""
-      })
-    }   
+  componentDidCatch(error, info){
+    this.setState({hasError: true})
   }
 
-  operation=(type)=>{
-    console.log(type)
+  input =(e)=>{
+    const [input,type] = e.target.value.split(',')
+    let result = 0
+    let expression = [0,false]
+
+    if(type === "number"){
+      if(this.state.deleted){
+        this.setState({
+          number: this.state.number.concat(input),
+          display: this.state.number.concat(input),
+          evaluate: this.state.prevEva.concat(` ${input}`),
+          prevEva: this.state.evaluate.concat(` ${input}`),
+          deleted: false
+        })
+       }else{
+        this.setState({
+          number: this.state.number.concat(input),
+          display: this.state.number.concat(input),
+          evaluate: this.state.prevEva.concat(input),
+          prevEva: this.state.evaluate.concat(input)
+        })
+      }
+
+    }else{
+      const evaluate = this.state.prevEva.concat(` ${input} `)
+      console.log("EVALUATE : ", evaluate)
+      const number = this.state.number || this.state.prevRes
+      const prevEva = this.state.prevEva
+      const prevRes =this.state.prevRes
+      const prevNum = this.state.prevNum
+
+      console.log("NUMBER : ", number)
+      expression = operation(input,type,number,prevEva,prevRes,prevNum);
+
+      if(expression[3]){
+        this.setState({
+          display: "",
+          number:"",
+          evaluate: "",
+          result: "",
+          prevNum: "",
+          prevEva: "",
+          prevRes: "",
+          deleted: false,
+          hasError: false
+        })
+       }else if(!expression[1] && !expression[2]){
+            this.setState({
+             display: this.state.display.concat(` ${input} `),
+             prevNum: this.state.number,
+             prevEva: evaluate,
+             evaluate: evaluate,
+             number: ""
+           })
+         }else if(expression[2]){
+           this.setState({
+             display: expression[0],
+             prevNum: this.state.number,
+             prevEva: expression[0],
+             evaluate: expression[0],
+             number: "",
+             prevRes: this.state.prevRes,
+             result: "",
+             deleted: true
+            })
+          
+         }else{
+            console.log('Expression is complete, let\'s evaluate')
+
+           try{
+             result = math.evaluate(expression[0])
+             console.log("Result : ", result)
+           }catch(e){
+             this.componentDidCatch()
+           }
+
+           this.setState({
+            display: result.toString(),
+            prevNum: this.state.number,
+            prevEva: expression[0],
+            evaluate: expression[0],
+            number: "",
+            prevRes: result.toString(),
+            result: result.toString()
+           })
+         }
+      
+    }   
   }
   
 
   render() {
-    const buttons = data
-    const numbers = this.state.numbers
-    return (
+    
+    
+
+     const buttons = data
+     const {display, evaluate, number , numbers, prevEva, prevNum, prevRes, result, deleted} = this.state
+
+    if(this.state.hasError){
+      toast.error(`Typo Error! at ${this.state.evaluate}`, {
+        position: toast.POSITION.BOTTOM_LEFT
+      });}
+
+
+
+    return ( 
       <>
       <Navigation />
       <Calculator 
         buttons={buttons} 
-        numbers={numbers} 
         input={this.input} 
         operation={this.operation} 
-        display={this.state.display} 
-        number={this.state.number}
+        display={display}
+        evaluate={evaluate}
+        prevEva={prevEva}
+        prevNum={prevNum}
+        prevRes={prevRes}
+        result={result}
+        deleted={deleted}
         />
+        <ToastContainer transition={Zoom}/>
     </>
     )
   }
 }
-
 export default App
+
+
+// pi, sin, cos, tan, ^ 2 not working alone
+// zero not shows evalueta to zero
+// toastify not reset state
+// pi = shows pi = then if AC not working!
+// sin 9 cos 9 tan 9 throws error
+// needs to use formatter function after 15 digits
+// toLocaleString don't show more than 4 after .
+
 

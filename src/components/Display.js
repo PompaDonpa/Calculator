@@ -1,14 +1,24 @@
 import React from 'react'
 
 function Display (props) {
-  const { numbers, display, number } = props
+  const { display, evaluate, number, result, deleted } = props
+  let formatted = ""
+  let infix = (deleted) ? display : evaluate;
 
-  const formatted = (isNaN(parseFloat(number))) ? 0 : parseFloat(number).toLocaleString()
-  const evaluate = (display != number) ? display : formatted
+    if(result !="" && display===result){
+      formatted = parseFloat(result).toLocaleString()
+      console.log(`FORMATTED : ${formatted}`)
+
+    }else{
+
+      formatted = (isNaN(parseFloat(number))) ? 0 : parseFloat(number).toLocaleString()
+      
+    }
+ 
   return (
     <div className='display glass'>
       {formatted || '0'}
-      <div className='preview'>{evaluate.toLocaleString() || '0'}</div>
+      <div className='preview'>{infix.trim().toLocaleString() || '0'}</div>
     </div>
   )
 }

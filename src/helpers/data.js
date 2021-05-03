@@ -25,7 +25,7 @@ const data = [
     {
         info :{
             type: "square",
-            value: "a²",
+            value: "²",
             symbol:"a²"
         },
         className: 'button scientific'
@@ -80,16 +80,16 @@ const data = [
     },
     {
         info :{
-            type: "percent",
-            value: "mod",
-            symbol: "%"
+            type: "delete",
+            value: "",
+            symbol: "C / ←"
         },
         className: 'button scientific'
     },
     {
         info :{
             type: "allClear",
-            value: "AC",
+            value: "",
             symbol: "AC"
         },
         className: 'button scientific ac'
@@ -97,16 +97,16 @@ const data = [
     {
         info :{
             type: "neg",
-            value: "±",
+            value: "",
             symbol: "±"
         },
         className: 'button scientific'
     },
     {
         info :{
-            type: "delete",
-            value: "←",
-            symbol: "←"
+            type: "percent",
+            value: "mod",
+            symbol: "%"
         },
         className: 'button scientific'
     },
