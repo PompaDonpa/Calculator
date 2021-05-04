@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
 @font-face {
   font-family: Terminator;
   src: url("./terminator.otf") format("opentype");
@@ -113,6 +115,15 @@
 
 .zero {
   grid-area: 8 / 1 / 9 / 3;
+}
+
+
+.boldMessage{
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  font-size: larger;
+  color: black;
+  font-weight: 700;
 }
 
 @media only screen and (max-width: 1080px) {

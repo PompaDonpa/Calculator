@@ -1,40 +1,56 @@
 const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
     
     let casePi = (prevRes ==="") ? number : prevRes
+    let casePrevRes = (prevRes ==="" && number ==="") ? "0" : prevRes
+    // let casePrevEva = prevEva.split('').filter(ele => ele != " ")
+    // console.log(casePrevEva)
     // let casePi = (prevNum ==="") ? number : prevNum
 
     let lastOperation = []
     let toEval = []
     let len = 0
     const whichType = type
-    
 
-    console.log(`This is operation prevRes: ${prevRes}`)
+    if(number === "" && prevNum === "" && prevRes === "" && type === "result"){
+        toEval = ["",false,false,true]
+        return toEval
+      }
 
-    if(prevRes != "" || type === "delete"){
-        lastOperation = prevEva.split(' ')
+    console.log(`This is operation casePrevRes: ${casePrevRes}`)
+    console.log(`Whictype: ${whichType}`)
+
+    if(prevRes != "" || type === "delete" || type === "result"){
+        lastOperation = prevEva.split('').filter(ele => ele != " ")
         len = lastOperation.length
-        console.log(`LAST OPERATION: ${lastOperation}`)
+        console.log(`LAST OPERATION: `)
+        console.log(`${lastOperation}`)
     }
 
-    if(number === "" && prevNum === "" && prevRes === ""){
+    
+
+    if(number === "" && prevNum === "" && casePrevRes === ""){
+        console.log('everything is empty')
         toEval = [input,false,false,false]
+        console.log(toEval)
         return toEval
     }
 
+    
+
+
     if(type === "geo"){
         switch(input){
-            case "sin" : toEval[0] = `sin(${number} deg)`;
+            case "sin" : toEval[0] = (number === "") ? `sin(0 deg)` :`sin(${number} deg)`;
                          toEval[1] = true ;
                          toEval[2] = false ;
                          toEval[3] = false;
                          break;
-            case "cos" : toEval[0] = `cos(${number} deg)`;
+            case "cos" : toEval[0] = (number === "") ? `cos(0 deg)`: `cos(${number} deg)`;
                          toEval[1] = true ;
                          toEval[2] = false ;
                          toEval[3] = false;
                          break;
-            case "tan" : toEval[0] = `tan(${number} deg)`;
+            case "tan" : toEval[0] = (number === "") ? `tan(0 deg)` : `tan(${number} deg)`;
                          toEval[1] = true ;
                          toEval[2] = false ;
                          toEval[3] = false;
@@ -72,19 +88,20 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
 
     switch (whichType){
 
-        case "square": toEval[0] = (number === "") ? `${prevRes}^2` : `${number}^2`;
+        case "square": toEval[0] = (number === "") ? `${casePrevRes}^2`: `${number}^2`;
                        toEval[1] = true ;
                        toEval[2] = false ;
                        toEval[3] = false;
                        break;
 
-        case "pow":    toEval[0] = `${number}^`;
-                       toEval[1] = false ;
-                       toEval[2] = false ;
-                       toEval[3] = false;
+        case "pow":    toEval[0] = (number === "") ? `${casePrevRes}` : `${number}^`;   
+                       toEval[1] = false ;   
+                       toEval[2] = false ;   
+                       toEval[3] = false;   
                        break;
 
-        case "sqrt":   toEval[0] = (number === "") ? `${prevRes}^(1/2)` : `${number}^(1/2)`; 
+
+        case "sqrt":   toEval[0] = (number === "") ? `${casePrevRes}^(1/2)` : `${number}^(1/2)`; 
                        toEval[1] = true ;
                        toEval[2] = false ;
                        toEval[3] = false;
@@ -102,13 +119,13 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
                        toEval[3] = false;
                        break;
 
-        case "factorial": toEval[0] = (number === "") ? `${prevRes}!` :  `${number}!`;
+        case "factorial": toEval[0] = (number === "") ? `${casePrevRes}!` :  `${number}!`;
                           toEval[1] = true ;
                           toEval[2] = false ;
                           toEval[3] = false;
                           break;
 
-        case "percent": toEval[0] = (number === "") ? `${prevRes}*(1/100)` :  `${number}*(1/100)`;
+        case "percent": toEval[0] = (number === "") ? `${casePrevRes}*(1/100)` :  `${number}*(1/100)`;
                         toEval[1] = true ;
                         toEval[2] = false ;
                         toEval[3] = false;
@@ -120,7 +137,7 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
                          toEval[3] = true;
                          break;
 
-        case "neg":     toEval[0] = (number === "") ? `${prevRes}*(-1)` :  `${number}*(-1)`;
+        case "neg":     toEval[0] = (number === "") ? `${casePrevRes}*(-1)` :  `${number}*(-1)`;
                         toEval[1] = true ;
                         toEval[2] = false ;
                         toEval[3] = false;
@@ -134,7 +151,8 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
 
         case "result": 
                         if(prevRes != ""){
-                            toEval[0] = `${prevRes} ${lastOperation[len-2]} ${lastOperation[len-1]}`
+                            toEval[0] = (len === 2) ? `${lastOperation[len-2]} ${lastOperation[len-1]}` 
+                                                    : `${prevRes} ${lastOperation[len-2]} ${lastOperation[len-1]}`
                             toEval[1] = true ;
                             toEval[2] = false ;
                             toEval[3] = false;
@@ -150,7 +168,8 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
         default: break;     
 
     }
-console.log(`toEval : ${toEval}`)
+console.log(`toEval : `)
+console.log(toEval)
 return toEval
 
 }

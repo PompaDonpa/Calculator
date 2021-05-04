@@ -37,6 +37,7 @@ class App extends React.Component {
     this.setState({hasError: true})
   }
 
+
   input =(e)=>{
     const [input,type] = e.target.value.split(',')
     let result = 0
@@ -109,19 +110,21 @@ class App extends React.Component {
            try{
              result = math.evaluate(expression[0])
              console.log("Result : ", result)
+             this.setState({
+              display: result.toString(),
+              prevNum: this.state.number,
+              prevEva: expression[0],
+              evaluate: expression[0],
+              number: "",
+              prevRes: result.toString(),
+              result: result.toString()
+             })
            }catch(e){
              this.componentDidCatch()
+
            }
 
-           this.setState({
-            display: result.toString(),
-            prevNum: this.state.number,
-            prevEva: expression[0],
-            evaluate: expression[0],
-            number: "",
-            prevRes: result.toString(),
-            result: result.toString()
-           })
+           
          }
       
     }   
@@ -137,8 +140,12 @@ class App extends React.Component {
 
     if(this.state.hasError){
       toast.error(`Typo Error! at ${this.state.evaluate}`, {
-        position: toast.POSITION.BOTTOM_LEFT
-      });}
+        position: toast.POSITION.BOTTOM_LEFT,className: 'boldMessage'
+      });
+      toast.warning(`Please Consider to Clear All`, {
+        position: toast.POSITION.UPPER_RIGTH, className: 'boldMessage'
+      });
+    }
 
 
 
@@ -157,10 +164,12 @@ class App extends React.Component {
         result={result}
         deleted={deleted}
         />
-        <ToastContainer transition={Zoom}/>
+
+        <ToastContainer transition={Zoom} autoClose={2000}/>
     </>
     )
-  }
+
+}
 }
 export default App
 
