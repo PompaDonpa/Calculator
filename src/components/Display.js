@@ -1,18 +1,21 @@
 import React from 'react'
 
+
 function Display (props) {
-  const { display, evaluate, number, result, deleted } = props
+  const { display, evaluate, number, result, deleted, formatter } = props
+  const lenResult = result.length
+
   let formatted = ""
   let infix = (deleted) ? display : evaluate;
 
-    if(result !="" && display===result){
-      formatted = parseFloat(result).toLocaleString()
-      console.log(`FORMATTED : ${formatted}`)
-
+    if(result !=="" && display===result){
+        if(lenResult < 21){
+          formatted = formatter(result, true)
+        }else{
+            formatted = formatter(result, false)
+        }
     }else{
-
-      formatted = (isNaN(parseFloat(number))) ? 0 : parseFloat(number).toLocaleString()
-      
+        formatted = (isNaN(parseFloat(number))) ? 0 : formatter(number, true)
     }
  
   return (

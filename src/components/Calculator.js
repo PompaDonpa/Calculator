@@ -5,7 +5,7 @@ import Display from './Display'
 
 function Calculator (props) {
 
-  const {buttons, input, operation, display, evaluate, number , prevEva, prevNum, prevRes, result, deleted}  = props
+  const {buttons, input, operation, display, evaluate, number , prevEva, prevNum, prevRes, result, deleted, formatter}  = props
 
   return (
     <div className='calculator'>
@@ -15,6 +15,7 @@ function Calculator (props) {
         number={number}
         result={result}
         deleted ={deleted}
+        formatter ={formatter}
       />
       <Buttons 
         buttons={buttons} 

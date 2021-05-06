@@ -1,16 +1,17 @@
 import React from 'react'
 import { ToastContainer,toast } from "react-toastify";
+import { Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
+
 import Navigation from './components/Navigation'
 import Calculator from './components/Calculator'
-import {Decimal} from 'decimal.js'
 import operation from './helpers/operation'
-import { create, all } from 'mathjs'
+import formatter from './helpers/formatter'
 import data from './helpers/data'
+
+import { create, all } from 'mathjs'
 import './App.css'
 import 'css-doodle'
-// import formatter from './helpers/formatter'
 
 
 const config = { }
@@ -63,13 +64,14 @@ class App extends React.Component {
 
     }else{
       const evaluate = this.state.prevEva.concat(` ${input} `)
-      console.log("EVALUATE : ", evaluate)
       const number = this.state.number || this.state.prevRes
       const prevEva = this.state.prevEva
       const prevRes =this.state.prevRes
       const prevNum = this.state.prevNum
+      
+      // console.log("EVALUATE : ", evaluate)
+      // console.log("NUMBER : ", number)
 
-      console.log("NUMBER : ", number)
       expression = operation(input,type,number,prevEva,prevRes,prevNum);
 
       if(expression[3]){
@@ -105,11 +107,11 @@ class App extends React.Component {
             })
           
          }else{
-            console.log('Expression is complete, let\'s evaluate')
+            // console.log('Expression is complete, let\'s evaluate')
 
            try{
              result = math.evaluate(expression[0])
-             console.log("Result : ", result)
+             // console.log("Result : ", result)
              this.setState({
               display: result.toString(),
               prevNum: this.state.number,
@@ -121,22 +123,16 @@ class App extends React.Component {
              })
            }catch(e){
              this.componentDidCatch()
-
-           }
-
-           
-         }
-      
+           }         
+         }     
     }   
   }
   
 
   render() {
     
-    
-
      const buttons = data
-     const {display, evaluate, number , numbers, prevEva, prevNum, prevRes, result, deleted} = this.state
+     const {display, evaluate, number , prevEva, prevNum, prevRes, result, deleted} = this.state
 
     if(this.state.hasError){
       toast.error(`Typo Error! at ${this.state.evaluate}`, {
@@ -152,7 +148,8 @@ class App extends React.Component {
       <>
       <Navigation />
       <Calculator 
-        buttons={buttons} 
+        buttons={buttons}
+        number = {number}
         input={this.input} 
         operation={this.operation} 
         display={display}
@@ -162,6 +159,7 @@ class App extends React.Component {
         prevRes={prevRes}
         result={result}
         deleted={deleted}
+        formatter ={formatter}
         />
 
         <ToastContainer transition={Zoom} autoClose={2000}/>
@@ -172,13 +170,5 @@ class App extends React.Component {
 }
 export default App
 
-
-// pi, sin, cos, tan, ^ 2 not working alone
-// zero not shows evalueta to zero
-// toastify not reset state
-// pi = shows pi = then if AC not working!
-// sin 9 cos 9 tan 9 throws error
-// needs to use formatter function after 15 digits
-// toLocaleString don't show more than 4 after .
 
 

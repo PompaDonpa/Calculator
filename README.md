@@ -7,7 +7,58 @@
 
 * The calculator utilizes JavaScript libraries to implement the fastest build-in methods to solve Math. 
 
-* This app is accessible, passing the `Lighthouse` audits and resolving potential security vulnerabilities.&ensp;&ensp;`Performance : 97%`
+* This app is accessible, passing the `Lighthouse` audits and resolving potential security vulnerabilities.&ensp;&ensp;`Performance : 99%`
+
+## ___Calculator Acceptance criteria & UI Design___
+
+- I can see a number keypad on the calculator with the numbers 0-9
+- I can see keys for the plus, subtract, multiply and divide operators.
+- I can see an equals `=` key.
+- I can see a `+/-` key.
+- I can see an all clear key `AC`.
+- I can see a "screen" which shows a default value of 0.
+
+<br/>
+
+  ## ***Functionality***
+
+  <br/>
+
+  **I can enter readable +/- integers**
+
+  - I can click a number key and see the number on the screen.
+  - I can enter multi-digit numbers on the keyboard and see them on the screen.
+  - When I enter a number of 1,000 or more, I see commas appear in the right place to format the number.
+  - I can make a positive number negative (or vice versa) with the `+/-` key.
+
+  <br/>
+
+  **I can add, subtract, multiply and divide**
+
+  - I can enter a number, `+`. another number, then `=` and see the correct addition result.
+  - I can enter a number, `-`. another number, then `=` and see the correct subtraction result.
+  - I can enter a number, `x`. another number, then `=` and see the correct multiplication result.
+
+  <br/>
+
+  **ScreenShots**
+  - Operations
+
+    <br/>
+    <img src="./public/Operations.gif" alt="Operations">
+    
+    --------
+  - Scientific notation
+
+    <br/>
+    <img src="./public/Scientific Notation.gif" alt="Scientific notation">
+
+    --------
+  - Preserve State
+    
+    <br/>
+    <img src="./public/Preserve State.gif" alt="Preserve State">
+      
 
 <br/>
 <br/>
@@ -15,13 +66,16 @@
 ## ___Libraries___
 <br/>
 
-1. [`underscore.js`](https://underscorejs.org/)
+1. [`math.js`](https://mathjs.org/)
 
 * ```nodejs
-  npm install underscore
+  npm install mathjs
   ```
-  ```javascript
-  import _, { map } from 'underscore'
+    ```javascript
+  import { create, all } from 'mathjs'
+    
+    const config = { }
+    const math = create(all, config)
   ```
 
 2. [`css-doodle`](https://css-doodle.com/)
@@ -33,26 +87,20 @@
   import 'css-dodle'
   ```
 
-3. [`decimal.js`](https://mikemcl.github.io/decimal.js/)
+3. [`React-Toastify`](https://fkhadra.github.io/react-toastify/introduction)
 
 * ```bash
-  npm install decimal.js
+  npm install --save react-toastify
   ```
   ```javascript
-  import {Decimal} from 'decimal.js'
+  import { ToastContainer, toast } from 'react-toastify'
+
+  import 'react-toastify/dist/ReactToastify.css'
+
+  import { Slide, Zoom, Flip, Bounce } from 'react-toastify'
   ```
 
-4. [`math.js`](https://mathjs.org/)
 
-* ```nodejs
-  npm install mathjs
-  ```
-    ```javascript
-  import { create, all } from 'mathjs'
-    
-    const config = { }
-    const math = create(all, config)
-  ```
 
 
 

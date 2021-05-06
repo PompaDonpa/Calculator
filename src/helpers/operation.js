@@ -2,28 +2,22 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
     
     let casePi = (prevRes ==="") ? number : prevRes
     let casePrevRes = (prevRes ==="" && number ==="") ? "0" : prevRes
-    // let casePrevEva = prevEva.split('').filter(ele => ele != " ")
-    // console.log(casePrevEva)
-    // let casePi = (prevNum ==="") ? number : prevNum
 
     let lastOperation = []
     let toEval = []
     let len = 0
+
     const whichType = type
 
     if(number === "" && prevNum === "" && prevRes === "" && type === "result"){
         toEval = ["",false,false,true]
         return toEval
-      }
+    }
 
-    console.log(`This is operation casePrevRes: ${casePrevRes}`)
-    console.log(`Whictype: ${whichType}`)
 
-    if(prevRes != "" || type === "delete" || type === "result"){
-        lastOperation = prevEva.split('').filter(ele => ele != " ")
+    if(prevRes !== "" || type === "delete" || type === "result"){
+        lastOperation = prevEva.split('').filter(ele => ele !== " ")
         len = lastOperation.length
-        console.log(`LAST OPERATION: `)
-        console.log(`${lastOperation}`)
     }
 
     
@@ -31,7 +25,7 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
     if(number === "" && prevNum === "" && casePrevRes === ""){
         console.log('everything is empty')
         toEval = [input,false,false,false]
-        console.log(toEval)
+    //  console.log(toEval)
         return toEval
     }
 
@@ -150,7 +144,7 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
                         break;
 
         case "result": 
-                        if(prevRes != ""){
+                        if(prevRes !== ""){
                             toEval[0] = (len === 2) ? `${lastOperation[len-2]} ${lastOperation[len-1]}` 
                                                     : `${prevRes} ${lastOperation[len-2]} ${lastOperation[len-1]}`
                             toEval[1] = true ;
@@ -168,8 +162,8 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
         default: break;     
 
     }
-console.log(`toEval : `)
-console.log(toEval)
+// console.log("toEval : ")
+// console.log(toEval)
 return toEval
 
 }
