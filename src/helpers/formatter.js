@@ -3,7 +3,7 @@ const formatter =(numbers,format)=>{
     const numbers_ = numbers
     const len = numbers.length
 
-    if((len >= 21 && format === false) || (numbers_.includes("e")) || (numbers_.includes(".")) || (numbers_.includes("-"))){
+    if((len > 21 && format === false) || (numbers_.includes("e")) || (numbers_.includes(".")) || (numbers_.includes("-"))){
         
         if(numbers_.includes("e")){
                 return numbers_
@@ -64,16 +64,16 @@ const formatter =(numbers,format)=>{
                  default : break;
              }break;
 
-        case 6 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,3)+'e'+len;break
-        case 7 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,3)+'e'+len;break
-        case 8 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,3)+'e'+len;break
-        case 9 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,3)+'e'+len;break
-        case 10 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,3)+'e'+len;break 
-        case 11 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,3)+'e'+len;break 
-        case 12 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,3)+'e'+len;break
-        case 13 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,3)+'e'+len;break
-        case 14 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,3)+'e'+len;break
-        case 15 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,3)+'e'+len;break         
+        case 6 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,4)+'e+'+len;break
+        case 7 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,4)+'e+'+len;break
+        case 8 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,4)+'e+'+len;break
+        case 9 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,4)+'e+'+len;break
+        case 10 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,4)+'e+'+len;break 
+        case 11 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,4)+'e+'+len;break 
+        case 12 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,4)+'e+'+len;break
+        case 13 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,4)+'e+'+len;break
+        case 14 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,4)+'e+'+len;break
+        case 15 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,4)+'e+'+len;break         
         default: break;
     }
     return display

@@ -6,6 +6,13 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
     let lastOperation = []
     let toEval = []
     let len = 0
+    let num2 =[]
+    let len2 = 0
+    let deleted = ""
+    let positive = 0
+    let negative = 0
+    let negative2nd = 0
+    let doubleNeg =  ""
 
     const whichType = type
 
@@ -17,9 +24,65 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
 
     if(prevRes !== "" || type === "delete" || type === "result"){
         lastOperation = prevEva.split('').filter(ele => ele !== " ")
-        len = lastOperation.length
+        let count = 0
+
+        lastOperation.forEach((ele,i)=>{    
+                if(!parseInt(ele) && count === 0){
+                    if((ele !== "0" ) && (ele !== "." ) && (ele !== "e" )){
+                        if((lastOperation.includes("e") && ele === "+")||(lastOperation.includes("e") && ele === "-")){
+                            positive = 1
+                            negative = 1
+
+                        }
+                        if((positive === 1)||(negative === 1)){
+                                positive = 0
+                                negative = 0
+                                
+                                
+                        }else{
+                            count = 1
+                            num2 = []
+                            num2.push(ele)
+                        }
+
+                    }
+                }else{
+                        num2.push(ele)
+                } 
+            
+        })
+
+
+        let num2_ = num2.slice(0)
+        len2 = num2_.splice(1,num2.length).join("")
+
+        negative2nd = 0
+        num2.forEach(n=>{
+
+            if(n === "-"){
+                negative2nd += 1    
+            }
+            if(negative2nd === 2){
+                num2=[]
+                num2.push(n)
+                negative2nd +=1
+            }else if(negative2nd === 3){
+                num2.push(n)
+            }
+        })
     }
 
+    len = lastOperation.length
+    deleted = lastOperation.splice(0,len-1).join("")
+ 
+    if(num2[0]==="-"){ 
+        doubleNeg = num2.splice(1,num2.length).join("")
+    }else if(negative2nd !== 0){
+       doubleNeg = num2.splice(5,num2.length).join("")
+       num2[0]=""
+    }else{
+            doubleNeg = num2.splice(1,num2.length).join("")
+         }
     
 
     if(number === "" && prevNum === "" && casePrevRes === ""){
@@ -28,9 +91,6 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
     //  console.log(toEval)
         return toEval
     }
-
-    
-
 
     if(type === "geo"){
         switch(input){
@@ -137,7 +197,7 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
                         toEval[3] = false;
                         break;
 
-        case "delete":  toEval[0] = `${lastOperation.splice(0,len-1).join(" ")}`
+        case "delete":  toEval[0] = `${deleted}`
                         toEval[1] = false ;
                         toEval[2] = true ;
                         toEval[3] = false;
@@ -146,7 +206,7 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
         case "result": 
                         if(prevRes !== ""){
                             toEval[0] = (len === 2) ? `${lastOperation[len-2]} ${lastOperation[len-1]}` 
-                                                    : `${prevRes} ${lastOperation[len-2]} ${lastOperation[len-1]}`
+                                                    : `${prevRes} ${num2[0]} ${doubleNeg}`
                             toEval[1] = true ;
                             toEval[2] = false ;
                             toEval[3] = false;
