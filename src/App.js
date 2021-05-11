@@ -20,6 +20,8 @@ const math = create(all, config)
 class App extends React.Component {
   constructor(props){
     super(props)
+    // I don't think any part of your app is using prevNum, prevEva, or prevRes.
+    // Part of thinking in react is finding a minimal representation of application state - get rid of state values you aren't using!
     this.state = {
       display: "",
       number:"",
