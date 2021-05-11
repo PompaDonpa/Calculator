@@ -169,6 +169,7 @@ class App extends React.Component {
         prevRes={prevRes}
         result={result}
         deleted={deleted}
+        {/* You can import formatter directly in the Calculator component instead of passing it as a prop */}
         formatter ={formatter}
         />
 
