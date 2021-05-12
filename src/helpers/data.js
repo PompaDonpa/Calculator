@@ -1,6 +1,8 @@
 const data = [
     {
         info :{
+                // This type is being used as an html attribute for buttons - buttons should only have one of the following types:
+                //    1. type="button" 2. type="reset" 3. type="submit"
                 type: "geo",
                 value: "sin",
                 symbol:"sin"
