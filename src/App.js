@@ -42,8 +42,11 @@ class App extends React.Component {
 
 
   input =(e)=>{
+    // instead of storing input and type in the value attribute of each button,
+    // you can acc
     const [input,type] = e.target.value.split(',')
     let result = 0
+    // Unnecessary declaration: expression isn't used before you reassign it another value further down
     let expression = [0,false]
 
     if(type === "number"){
