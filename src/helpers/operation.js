@@ -1,3 +1,5 @@
+// try to avoid writing functions that are this long - how could you split this up into smaller helper functions?
+// What does this function do? It seems very important, i think it deserves documentation explaining its purpose and use.
 const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
     
     let casePi = (prevRes ==="") ? number : prevRes
@@ -27,6 +29,7 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
         let count = 0
 
         lastOperation.forEach((ele,i)=>{    
+            // This is a lot of deeply nested if conditions. Look for ways to simplify this!
                 if(!parseInt(ele) && count === 0){
                     if((ele !== "0" ) && (ele !== "." ) && (ele !== "e" )){
                         if((lastOperation.includes("e") && ele === "+")||(lastOperation.includes("e") && ele === "-")){
