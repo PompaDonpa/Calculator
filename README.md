@@ -113,25 +113,16 @@
 
 ## ___FrontEnd___
 <br/>
-
-&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img src="https://api.iconify.design/logos:javascript.svg" height="36px">
-&ensp;&ensp;&ensp;&ensp;
-<img src="https://api.iconify.design/logos:html-5.svg" height="44px">
-&ensp;&ensp;&ensp;&ensp;
-<img src="https://api.iconify.design/logos:css-3.svg" height="44px">
-&ensp;&ensp;&ensp;&ensp;
-<img src="https://api.iconify.design/logos:react.svg" width="36px" height="36px">
-<br/>
-<br/>
-
-&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img src="https://api.iconify.design/logos:trello.svg" height="34px">
-&ensp;&ensp;
-<img src="https://api.iconify.design/logos:markdown.svg" height="34px">
-&ensp;&ensp;
-<img src="https://api.iconify.design/logos:npm-icon.svg" height="32px">
-&ensp;&ensp;&ensp;&ensp;
+<div align='center'>
+<img src="https://api.iconify.design/logos:javascript.svg" height="36px">&emsp;
+<img src="https://api.iconify.design/logos:html-5.svg" height="44px">&emsp;
+<img src="https://api.iconify.design/logos:css-3.svg" height="44px">&emsp;
+<img src="https://api.iconify.design/logos:react.svg" width="36px" height="36px">&emsp;
+<img src="https://api.iconify.design/logos:trello.svg" height="34px">&emsp;
+<img src="https://api.iconify.design/logos:markdown.svg" height="34px">&emsp;
+<img src="https://api.iconify.design/logos:npm-icon.svg" height="32px">&emsp;
 <img src="https://api.iconify.design/logos:visual-studio-code.svg" height="32px">
-
+</div>  
 
 <br/>
 <br/>
@@ -141,12 +132,11 @@
 <br/>
 <br/>
 
-&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img src="https://api.iconify.design/logos:netlify.svg" width="36px" height="36px">
-&ensp;&ensp;&ensp;&ensp;
-<img src="https://api.iconify.design/logos:circleci.svg" width="36px" height="36px">
-&ensp;&ensp;&ensp;&ensp;
+<div align="center">
+<img src="https://api.iconify.design/logos:netlify.svg" width="36px" height="36px">&emsp;
+<img src="https://api.iconify.design/logos:circleci.svg" width="36px" height="36px">&emsp;
 <img src="https://api.iconify.design/logos:git.svg" height="36px">
-
+</div>
 
  <br />
  <br />
