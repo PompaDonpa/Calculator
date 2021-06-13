@@ -20,6 +20,8 @@ const math = create(all, config)
 class App extends React.Component {
   constructor(props){
     super(props)
+    // I don't think any part of your app is using prevNum, prevEva, or prevRes.
+    // Part of thinking in react is finding a minimal representation of application state - get rid of state values you aren't using!
     this.state = {
       display: "",
       number:"",
@@ -40,8 +42,11 @@ class App extends React.Component {
 
 
   input =(e)=>{
+    // instead of storing input and type in the value attribute of each button,
+    // you can acc
     const [input,type] = e.target.value.split(',')
     let result = 0
+    // Unnecessary declaration: expression isn't used before you reassign it another value further down
     let expression = [0,false]
 
     if(type === "number"){
@@ -122,6 +127,9 @@ class App extends React.Component {
               result: result.toString()
              })
            }catch(e){
+             // You shouldn't call lifecycle methods in your own code.
+             // If you want to reuse the same code that is run by componentDidCatch, create a
+             // different method that isn't a lifecycle method.
              this.componentDidCatch()
            }         
          }     
@@ -130,10 +138,15 @@ class App extends React.Component {
   
 
   render() {
-    
+     // It's generally not a good idea to write components that rely on hardcoded data that's imported from another file
+     // We only did this in the lifecycle lab to emulate what it would be like to work with api data
+     // I'd recommend creating a public field with this button information instead.
      const buttons = data
      const {display, evaluate, number , prevEva, prevNum, prevRes, result, deleted} = this.state
 
+     // This shouldn't be inside the render method!
+     // the `toast` function has side effects, and so it only be used in lifecycle methods that are part of the commit phase.
+     // This likely belongs inside componentDidUpdate
     if(this.state.hasError){
       toast.error(`Typo Error! at ${this.state.evaluate}`, {
         position: toast.POSITION.BOTTOM_LEFT,className: 'boldMessage'
@@ -159,6 +172,7 @@ class App extends React.Component {
         prevRes={prevRes}
         result={result}
         deleted={deleted}
+        {/* You can import formatter directly in the Calculator component instead of passing it as a prop */}
         formatter ={formatter}
         />
 
