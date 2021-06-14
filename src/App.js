@@ -1,173 +1,141 @@
-import React from 'react'
+// Components
+import React, { useState, useEffect } from 'react'
+import Navigation from './components/Navigation'
+import Calculator from './components/Calculator'
+
+// UX / UI
 import { ToastContainer,toast } from "react-toastify";
 import { Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import Navigation from './components/Navigation'
-import Calculator from './components/Calculator'
-import operation from './helpers/operation'
-import formatter from './helpers/formatter'
-import data from './helpers/data'
-
 import { create, all } from 'mathjs'
 import './App.css'
 import 'css-doodle'
 
-
+// Configuration for MathJS
+const operation = require('./helpers/operation')
 const config = { }
 const math = create(all, config)
 
-class App extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      display: "",
-      number:"",
-      evaluate: "",
-      result: "",
-      prevNum: "",
-      prevEva: "",
-      prevRes: "",
-      deleted: false,
-      hasError: false
-    }
 
+// Main Function
+const App = () => {
+
+  // Set Hooks
+  const [ hasError, sethasError ] = useState([0])
+  const [ evaluate, setEvaluate ] = useState("")
+  const  [ deleted, setDeleted ]  = useState(false)
+  const  [ prevNum, setPrevNum ]  = useState("")
+  const  [ prevEva, setPrevEva ]  = useState("")
+  const  [ prevRes, setPrevRes ]  = useState("")
+  const  [ display, setDisplay ]  = useState("")
+  const   [ result, setResult ]   = useState("")
+  const   [ number, setNumber ]   = useState("")
+
+  // Function reset AC
+  const reset = () => {
+    setEvaluate("")
+    setDeleted("")
+    setPrevNum("")
+    setPrevEva("")
+    setPrevRes("")
+    setDisplay("")
+    setResult("")
+    setNumber("")
   }
-  
-  componentDidCatch(error, info){
-    this.setState({hasError: true})
-  }
 
+  // Calculator Click Event Manager
+  const userInput =(input, category)=>{
 
-  input =(e)=>{
-    const [input,type] = e.target.value.split(',')
-    let result = 0
-    let expression = [0,false]
+    if(category === "number"){
+      if(deleted){
+        setNumber(number+input)
+        setDisplay(number+input)
+        setEvaluate(`${prevEva} ${input}`)
+        setPrevEva(`${evaluate} ${input}`)
+        setDeleted(false)
+      }else{
 
-    if(type === "number"){
-      if(this.state.deleted){
-        this.setState({
-          number: this.state.number.concat(input),
-          display: this.state.number.concat(input),
-          evaluate: this.state.prevEva.concat(` ${input}`),
-          prevEva: this.state.evaluate.concat(` ${input}`),
-          deleted: false
-        })
-       }else{
-        this.setState({
-          number: this.state.number.concat(input),
-          display: this.state.number.concat(input),
-          evaluate: this.state.prevEva.concat(input),
-          prevEva: this.state.evaluate.concat(input)
-        })
+        setNumber(number+input)
+        setDisplay(number+input)
+        setEvaluate(prevEva+input)
+        setPrevEva(evaluate+input)
       }
 
     }else{
-      const evaluate = this.state.prevEva.concat(` ${input} `)
-      const number = this.state.number || this.state.prevRes
-      const prevEva = this.state.prevEva
-      const prevRes =this.state.prevRes
-      const prevNum = this.state.prevNum
       
-      // console.log("EVALUATE : ", evaluate)
-      // console.log("NUMBER : ", number)
-
-      expression = operation(input,type,number,prevEva,prevRes,prevNum);
+      const tempEvaluate = (`${prevEva} ${input} `)
+      const tempNumber   = number || prevRes
+      const tempPrevEva  = prevEva
+      const tempPrevRes  = prevRes
+      const tempPrevNum  = prevNum
+      
+      let expression = operation(input,category,tempNumber,tempPrevEva,tempPrevRes,tempPrevNum)
 
       if(expression[3]){
-        this.setState({
-          display: "",
-          number:"",
-          evaluate: "",
-          result: "",
-          prevNum: "",
-          prevEva: "",
-          prevRes: "",
-          deleted: false,
-          hasError: false
-        })
-       }else if(!expression[1] && !expression[2]){
-            this.setState({
-             display: this.state.display.concat(` ${input} `),
-             prevNum: this.state.number,
-             prevEva: evaluate,
-             evaluate: evaluate,
-             number: ""
-           })
-         }else if(expression[2]){
-           this.setState({
-             display: expression[0],
-             prevNum: this.state.number,
-             prevEva: expression[0],
-             evaluate: expression[0],
-             number: "",
-             prevRes: this.state.prevRes,
-             result: "",
-             deleted: true
-            })
-          
-         }else{
-            // console.log('Expression is complete, let\'s evaluate')
-
-           try{
-             result = math.evaluate(expression[0])
-             // console.log("Result : ", result)
-             this.setState({
-              display: result.toString(),
-              prevNum: this.state.number,
-              prevEva: expression[0],
-              evaluate: expression[0],
-              number: "",
-              prevRes: result.toString(),
-              result: result.toString()
-             })
-           }catch(e){
-             this.componentDidCatch()
-           }         
-         }     
+        reset()
+        }else if(!expression[1] && !expression[2]){
+          setDisplay(`${display} ${input}`)
+          setPrevNum(number)
+          setPrevEva(tempEvaluate)
+          setEvaluate(tempEvaluate)
+          setNumber("")
+        }else if(expression[2]){
+           setDisplay(expression[0])
+           setPrevNum(number)
+           setEvaluate(expression[0])
+           setPrevEva(expression[0])
+           setNumber("")
+           setPrevRes(prevRes)
+           setResult("")
+           setDeleted(true)
+        }else{
+           
+        try{
+          let tempResult = math.evaluate(expression[0])
+          setDisplay(tempResult.toString())
+          setPrevNum(number)
+          setPrevEva(expression[0])
+          setEvaluate(expression[0])
+          setNumber("")
+          setPrevRes(tempResult.toString())
+          setResult(tempResult.toString())
+        }catch(e){ sethasError([1]) }         
+      }     
     }   
   }
   
-
-  render() {
+  useEffect(()=>{ 
     
-     const buttons = data
-     const {display, evaluate, number , prevEva, prevNum, prevRes, result, deleted} = this.state
-
-    if(this.state.hasError){
-      toast.error(`Typo Error! at ${this.state.evaluate}`, {
+    return () =>{ 
+      toast.error("Typo Error!", {
         position: toast.POSITION.BOTTOM_LEFT,className: 'boldMessage'
-      });
+    });
       toast.warning(`Please Consider to Clear All`, {
         position: toast.POSITION.UPPER_RIGTH, className: 'boldMessage'
-      });
-    }
+    });
+  }},[hasError])
 
 
-    return ( 
-      <>
+  return ( 
+  <>
       <Navigation />
       <Calculator 
-        buttons={buttons}
         number = {number}
-        input={this.input} 
-        operation={this.operation} 
+        userInput={userInput} 
         display={display}
         evaluate={evaluate}
         prevEva={prevEva}
         prevNum={prevNum}
         prevRes={prevRes}
         result={result}
-        deleted={deleted}
-        formatter ={formatter}
-        />
+        deleted={deleted}/>
 
-        <ToastContainer transition={Zoom} autoClose={2000}/>
-    </>
-    )
+      <ToastContainer transition={Zoom} autoClose={2000}/>
+  </>
+  )
 
 }
-}
+
 export default App
 
 

@@ -1,64 +1,49 @@
-const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
+const operation = ( input, type, number, prevEva, prevRes, prevNum )=>{
     
-    let casePi = (prevRes ==="") ? number : prevRes
-    let casePrevRes = (prevRes ==="" && number ==="") ? "0" : prevRes
-
+    let casePrevRes   = (prevRes ==="" && number ==="") ? "0" : prevRes
+    let   casePi      = (prevRes ==="") ? number : prevRes
     let lastOperation = []
-    let toEval = []
-    let len = 0
-    let num2 =[]
-    let len2 = 0
-    let deleted = ""
-    let positive = 0
-    let negative = 0
-    let negative2nd = 0
-    let doubleNeg =  ""
-
-    const whichType = type
+    let  negative2nd  = 0
+    let   doubleNeg   = ""
+    let   negative    = 0
+    let   positive    = 0
+    let    toEval     = []
+    let     num2      = []
+    let     len       = 0
 
     if(number === "" && prevNum === "" && prevRes === "" && type === "result"){
         toEval = ["",false,false,true]
         return toEval
     }
 
-
     if(prevRes !== "" || type === "delete" || type === "result"){
         lastOperation = prevEva.split('').filter(ele => ele !== " ")
         let count = 0
-
-        lastOperation.forEach((ele,i)=>{    
-                if(!parseInt(ele) && count === 0){
-                    if((ele !== "0" ) && (ele !== "." ) && (ele !== "e" )){
-                        if((lastOperation.includes("e") && ele === "+")||(lastOperation.includes("e") && ele === "-")){
-                            positive = 1
-                            negative = 1
-
-                        }
-                        if((positive === 1)||(negative === 1)){
-                                positive = 0
-                                negative = 0
-                                
-                                
-                        }else{
-                            count = 1
-                            num2 = []
-                            num2.push(ele)
-                        }
-
+        lastOperation.forEach((ele,i)=>{
+            if(!parseInt(ele) && count === 0){
+                if((ele !== "0" ) && (ele !== "." ) && (ele !== "e" )){
+                    if((lastOperation.includes("e") && ele === "+")||(lastOperation.includes("e") && ele === "-")){
+                        positive = 1
+                        negative = 1
                     }
-                }else{
+                    if((positive === 1)||(negative === 1)){
+                        positive = 0
+                        negative = 0
+                    }else{
+                        count = 1
+                        num2 = []
                         num2.push(ele)
-                } 
-            
+                    }
+
+                }
+            }else{
+                num2.push(ele)
+            }    
         })
-
-
-        let num2_ = num2.slice(0)
-        len2 = num2_.splice(1,num2.length).join("")
 
         negative2nd = 0
         num2.forEach(n=>{
-
+            
             if(n === "-"){
                 negative2nd += 1    
             }
@@ -72,23 +57,21 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
         })
     }
 
-    len = lastOperation.length
-    deleted = lastOperation.splice(0,len-1).join("")
+   
+    let deleted = lastOperation.splice(0,lastOperation.length-1).join("")
  
-    if(num2[0]==="-"){ 
+    if(num2[0]==="-"){
         doubleNeg = num2.splice(1,num2.length).join("")
     }else if(negative2nd !== 0){
-       doubleNeg = num2.splice(5,num2.length).join("")
-       num2[0]=""
+        doubleNeg = num2.splice(5,num2.length).join("")
+        num2[0]=""
     }else{
-            doubleNeg = num2.splice(1,num2.length).join("")
-         }
+        doubleNeg = num2.splice(1,num2.length).join("")
+    }
     
 
     if(number === "" && prevNum === "" && casePrevRes === ""){
-        console.log('everything is empty')
         toEval = [input,false,false,false]
-    //  console.log(toEval)
         return toEval
     }
 
@@ -140,7 +123,7 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
     }
 
 
-    switch (whichType){
+    switch (type){
 
         case "square": toEval[0] = (number === "") ? `${casePrevRes}^2`: `${number}^2`;
                        toEval[1] = true ;
@@ -222,10 +205,7 @@ const operation=(input,type,number,prevEva, prevRes, prevNum)=>{
         default: break;     
 
     }
-// console.log("toEval : ")
-// console.log(toEval)
 return toEval
-
 }
 
-export default operation
+module.exports =  operation

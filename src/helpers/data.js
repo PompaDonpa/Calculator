@@ -1,244 +1,242 @@
-const data = [
+module.exports = [
     {
         info :{
-                type: "geo",
-                value: "sin",
+                category: "geo",
+                evaluate: "sin",
                 symbol:"sin"
         },
         className: 'button scientific'
     },{
         info :{
-            type: "geo",
-            value: "cos",
+            category: "geo",
+            evaluate: "cos",
             symbol:"cos"
         },
         className: 'button scientific'
     },
     {
         info :{
-            type: "geo",
-            value: "tan",
+            category: "geo",
+            evaluate: "tan",
             symbol:"tan"
         },
         className: 'button scientific'
     },
     {
         info :{
-            type: "square",
-            value: "²",
+            category: "square",
+            evaluate: "²",
             symbol:"a²"
         },
         className: 'button scientific'
     },
     {
         info :{
-            type: "pow",
-            value: "^",
-            symbol:"^"
+            category: "pow",
+            evaluate: "^",
+            symbol:"aᵇ"
         },
         className: 'button scientific'
     },
     {
         info :{
-            type: "sqrt",
-            value: "sqrt",
+            category: "sqrt",
+            evaluate: "sqrt",
             symbol: "√"
         },
         className: 'button scientific'
     },
     {
         info :{
-            type: "pi",
-            value: "pi",
-            symbol: "π"
+            category: "pi",
+            evaluate: "pi",
+            symbol: "𝛑"
         },
         className: 'button scientific'
     },
     {
         info :{
-            type: "exp",
-            value: "(",
+            category: "exp",
+            evaluate: "(",
             symbol: "("
         },
         className: 'button scientific'
     },
     {
         info :{
-            type: "exp",
-            value: ")",
+            category: "exp",
+            evaluate: ")",
             symbol: ")"
         },
         className: 'button scientific'
     },
     {
         info :{
-            type: "factorial",
-            value: "!",
+            category: "factorial",
+            evaluate: "!",
             symbol: "!"
         },
         className: 'button'
     },
     {
         info :{
-            type: "delete",
-            value: "",
+            category: "delete",
+            evaluate: "",
             symbol: "C / ←"
         },
         className: 'button scientific'
     },
     {
         info :{
-            type: "allClear",
-            value: "",
+            category: "allClear",
+            evaluate: "",
             symbol: "AC"
         },
         className: 'button scientific ac'
     },
     {
         info :{
-            type: "neg",
-            value: "",
+            category: "neg",
+            evaluate: "",
             symbol: "±"
         },
         className: 'button scientific'
     },
     {
         info :{
-            type: "percent",
-            value: "mod",
+            category: "percent",
+            evaluate: "mod",
             symbol: "%"
         },
         className: 'button scientific'
     },
     {
         info :{
-            type: "number",
-            value: "7",
+            category: "number",
+            evaluate: "7",
             symbol: "7"
         },
         className: 'button number'
     },
     {
         info :{
-            type: "number",
-            value: "8",
+            category: "number",
+            evaluate: "8",
             symbol: "8"
         },
         className: 'button number'
     },
     {
         info :{
-            type: "number",
-            value: "9",
+            category: "number",
+            evaluate: "9",
             symbol: "9"
         },
         className: 'button number'
     },
     {
         info :{
-            type: "operator",
-            value: "/",
+            category: "operator",
+            evaluate: "/",
             symbol: "÷"
         },
         className: 'button control'
     },
     {
         info :{
-            type: "number",
-            value: "4",
+            category: "number",
+            evaluate: "4",
             symbol: "4"
         },
         className: 'button number'
     },
     {
         info :{
-            type: "number",
-            value: "5",
+            category: "number",
+            evaluate: "5",
             symbol: "5"
         },
         className: 'button number'
     },
     {
         info :{
-            type: "number",
-            value: "6",
+            category: "number",
+            evaluate: "6",
             symbol: "6"
         },
         className: 'button number'
     },
     {
         info :{
-            type: "operator",
-            value: "*",
-            symbol: "x"
+            category: "operator",
+            evaluate: "*",
+            symbol: "✖"
         },
         className: 'button control'
     },
     {
         info :{
-            type: "number",
-            value: "1",
+            category: "number",
+            evaluate: "1",
             symbol: "1"
         },
         className: 'button number'
     },
     {
         info :{
-            type: "number",
-            value: "2",
+            category: "number",
+            evaluate: "2",
             symbol: "2"
         },
         className: 'button number'
     },
     {
         info :{
-            type: "number",
-            value: "3",
+            category: "number",
+            evaluate: "3",
             symbol: "3"
         },
         className: 'button number'
     },
     {
         info :{
-            type: "operator",
-            value: "-",
+            category: "operator",
+            evaluate: "-",
             symbol: "-"
         },
         className: 'button control'
     },
     {
         info :{
-            type: "result",
-            value: "=",
+            category: "result",
+            evaluate: "=",
             symbol: "="
         },
         className: 'button control result'
     },
     {
         info :{
-            type : "number",
-            value: "0",
+            category : "number",
+            evaluate: "0",
             symbol: "0"
         },
         className: 'button number zero'
     },
     {
         info :{
-            type: "number",
-            value: ".",
+            category: "number",
+            evaluate: ".",
             symbol: "."
         },
         className: 'button number'
     },
     {
         info :{
-            type: "operator",
-            value: "+",
-            symbol: "+"
+            category: "operator",
+            evaluate: "+",
+            symbol: "✚"
         },
         className: 'button control'
     }
 
 ]
-
-export default data;

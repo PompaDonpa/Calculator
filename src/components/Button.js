@@ -1,14 +1,12 @@
 import React from 'react'
 
-function Button (props) {
-  const { type, value, symbol, className, input } = props
+function Button ({ category, evaluate, symbol, className, userInput } ) {
 
   return (
     <button
-      type={type}
-      value={`${value},${type}`}
-      className={className}
-      onClick={input}
+      category={category}
+      className={className}            
+      onClick={()=>userInput(evaluate,category)}
     >
       {symbol}
     </button>
