@@ -11,8 +11,12 @@ import { create, all } from 'mathjs'
 import './App.css'
 import 'css-doodle'
 
-// Configuration for MathJS
+
+// I'm simulating a backend API response from helpers, 
+// because I depend on the helper functions. And I don't
+// understand what is a public field
 const operation = require('./helpers/operation')
+// Configuration for MathJS
 const config = { }
 const math = create(all, config)
 
@@ -69,6 +73,7 @@ const App = () => {
       const tempPrevRes  = prevRes
       const tempPrevNum  = prevNum
       
+
       let expression = operation(input,category,tempNumber,tempPrevEva,tempPrevRes,tempPrevNum)
 
       if(expression[3]){
@@ -80,7 +85,7 @@ const App = () => {
           setEvaluate(tempEvaluate)
           setNumber("")
         }else if(expression[2]){
-           setDisplay(expression[0])
+           setDisplay(tempPrevRes)
            setPrevNum(number)
            setEvaluate(expression[0])
            setPrevEva(expression[0])

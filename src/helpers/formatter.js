@@ -6,6 +6,9 @@ const formatter = ( numbers, format )=>{
     const    div   = Math.floor(len / 3)
     const    mod   = len % 3
 
+//  This section controls if we are dealing with exponential 'e', in case we have a number with e with more than 21 characters
+//  we use a custome made formatter, if not use .toLocaleString()
+
     if((len > 21 && format === false) || (numbers_.includes("e")) || (numbers_.includes(".")) || (numbers_.includes("-"))){
         if(numbers_.includes("e")){
             return numbers_
@@ -68,7 +71,7 @@ const formatter = ( numbers, format )=>{
         case 15 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,15)+'e+'+len;break
         case 13 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,15)+'e+'+len;break
         case 14 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,15)+'e+'+len;break
-        case 15 : display = numbers_.substring(0,1)+'.'+ numbers_.substring(1,15)+'e+'+len;break         
+      
         default: break;
     }
     return display

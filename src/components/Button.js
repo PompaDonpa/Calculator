@@ -1,5 +1,3 @@
-import React from 'react'
-
 function Button ({ category, evaluate, symbol, className, userInput } ) {
 
   return (
