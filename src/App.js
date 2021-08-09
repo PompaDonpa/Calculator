@@ -96,7 +96,7 @@ const App = () => {
         }else{
            
         try{
-          let tempResult = math.evaluate(expression[0])
+          let tempResult = expression[0].split('').includes("/") ? Math.round(math.evaluate(expression[0])) : math.evaluate(expression[0])
           setDisplay(tempResult.toString())
           setPrevNum(number)
           setPrevEva(expression[0])
